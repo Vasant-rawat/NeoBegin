@@ -108,20 +108,22 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 </details>
 
 ## 🗂️ Project Structure
-
-```mermaid
-graph TD
-    A[~/.config/nvim] --> B[after/plugin]
-    A --> C[lua/vasant]
-    A --> D[init.lua]
-    B --> E[colors.lua]
-    B --> F[fugitive.lua]
-    B --> G[...]
-    C --> H[init.lua]
-    C --> I[packer.lua]
-    C --> J[...]
+```bash
+📂 ~/.config/nvim/
+├── 📂 after/plugin/
+│   ├── colors.lua
+│   ├── fugitive.lua
+│   ├── harpoon.lua
+│   ├── lsp.lua
+│   ├── telescope.lua
+│   └── undotree.lua
+├── 📂 lua/vasant/
+│   ├── init.lua
+│   ├── packer.lua
+│   ├── remap.lua
+│   └── set.lua
+└── init.lua
 ```
-
 ## ⌨️ Keybindings
 
 > [!TIP]
@@ -137,38 +139,61 @@ graph TD
 | `<leader>pv` | File explorer | Normal |
 | `<leader>s` | Search & replace | Normal |
 
-### Navigation
-| Key | Action | Mode |
-|-----|--------|------|
-| `<C-p>` | Fuzzy find files | Normal |
-| `<C-f>` | Find in files | Normal |
-| `<C-e>` | Recent files | Normal |
-
 </details>
 
 <details>
 <summary>🔍 Telescope</summary>
 
-### Fuzzy Finding
-| Key | Action |
-|-----|--------|
-| `<leader>ff` | Find files |
-| `<leader>fg` | Live grep |
-| `<leader>fb` | Buffers |
-| `<leader>fh` | Help tags |
+### Telescope
+| Key | Action | Mode |
+|-----|--------|------|
+| `<leader>ff` | Find files | Normal |
+| `<leader>fg` | Live grep | Normal |
+| `<leader>fb` | Browse buffers | Normal |
+| `<leader>fh` | Help tags | Normal |
 
 </details>
 
 <details>
 <summary>📝 LSP</summary>
+| Key | Action | Mode |
+|-----|--------|------|
+| `gd` | Go to definition | Normal |
+| `K` | Hover documentation | Normal |
+| `<leader>vws` | Workspace symbol | Normal |
+| `<leader>vd` | Open diagnostic | Normal |
+| `[d]` | Next diagnostic | Normal |
+| `]d` | Previous diagnostic | Normal |
+| `<leader>ca` | Code action | Normal |
+| `<leader>rr` | References | Normal |
+| `<leader>rn` | Rename | Normal |
 
-### Code Navigation
-| Key | Action |
-|-----|--------|
-| `gd` | Go to definition |
-| `K` | Hover doc |
-| `<leader>ca` | Code actions |
-| `<leader>rn` | Rename |
+</details>
+
+
+<details>
+<summary> ⚙️💻 Advance </summary>
+
+### Harpoon
+| Key | Action | Mode |
+|-----|--------|------|
+| `<leader>a` | Add file | Normal |
+| `<C-e>` | Toggle quick menu | Normal |
+| `<C-h>` | Navigate to file 1 | Normal |
+| `<C-t>` | Navigate to file 2 | Normal |
+| `<C-n>` | Navigate to file 3 | Normal |
+| `<C-s>` | Navigate to file 4 | Normal |
+
+### Git (Fugitive)
+| Key | Action | Mode |
+|-----|--------|------|
+| `<leader>gs` | Git status | Normal |
+
+### Other
+| Key | Action | Mode |
+|-----|--------|------|
+| `<leader>u` | Toggle Undotree | Normal |
+
 
 </details>
 

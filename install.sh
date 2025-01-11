@@ -18,7 +18,7 @@ readonly REQUIRED_COMMANDS=(
     "ripgrep"
 )
 
-# Progress indicator
+ Progress indicator
 spinner() {
     local pid=$1
     local delay=0.1
