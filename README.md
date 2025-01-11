@@ -80,7 +80,7 @@ sudo pacman -S neovim git nodejs ripgrep
 ### 🔥 One-Line Installation
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/yourusername/nvim-config/main/install.sh | bash
+    curl -sSL https://raw.githubusercontent.com/Vasant-rawat/Basice-nvim-config-for-beginner/main/install.sh | bash
 ```
 
 <details>
