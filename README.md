@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 Cosmic Neovim
+# 🚀 Neovim
 
 [![Lua](https://img.shields.io/badge/Built%20with-Lua-blue.svg?style=for-the-badge&logo=lua)](https://lua.org)
 [![Neovim](https://img.shields.io/badge/Built%20for-Neovim-green.svg?style=for-the-badge&logo=neovim)](https://neovim.io)
