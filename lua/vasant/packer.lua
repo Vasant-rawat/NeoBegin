@@ -28,8 +28,22 @@ use {
     "williamboman/mason.nvim"
 }
 -- For lsp(basically for auto compelition of code in simple words)
-use({'VonHeikemen/lsp-zero.nvim', branch = 'v4.x'})
-use({'neovim/nvim-lspconfig'})
-use({'hrsh7th/nvim-cmp'})
-use({'hrsh7th/cmp-nvim-lsp'})
-  end)
+use {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v4.x',
+    requires = {
+        -- LSP Support
+        {'williamboman/mason.nvim'},
+        {'williamboman/mason-lspconfig.nvim'},
+        {'neovim/nvim-lspconfig'},
+        
+        -- Autocompletion
+        {'hrsh7th/nvim-cmp'},
+        {'hrsh7th/cmp-nvim-lsp'},
+        {'hrsh7th/cmp-buffer'},
+        {'hrsh7th/cmp-path'},
+        {'saadparwaiz1/cmp_luasnip'},
+        {'L3MON4D3/LuaSnip'},
+    }
+}
+end)
