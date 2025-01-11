@@ -1,1 +1,1 @@
-require("vasant.init")
+require("vasant")
