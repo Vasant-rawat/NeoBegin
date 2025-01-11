@@ -1,10 +1,3 @@
-#!/bin/bash
-
-# Create the directory if it doesn't exist
-mkdir -p ~/.config/nvim
-
-# Create and write to README.md
-cat > ~/.config/nvim/README.md << 'EOL'
 <div align="center">
 
 # 🚀 Cosmic Neovim
@@ -65,59 +58,59 @@ cat > ~/.config/nvim/README.md << 'EOL'
 > [!IMPORTANT]
 > Make sure you have these installed before proceeding:
 
-\`\`\`bash
+```bash
 # Install prerequisites (Ubuntu/Debian)
 sudo apt install neovim git nodejs ripgrep
-\`\`\`
+```
 
 <details>
 <summary>📦 Other Operating Systems</summary>
 
 #### macOS
-\`\`\`bash
+```bash
 brew install neovim git node ripgrep
-\`\`\`
+```
 
 #### Arch Linux
-\`\`\`bash
+```bash
 sudo pacman -S neovim git nodejs ripgrep
-\`\`\`
+```
 </details>
 
 ### 🔥 One-Line Installation
 
-\`\`\`bash
+```bash
 curl -sSL https://raw.githubusercontent.com/yourusername/nvim-config/main/install.sh | bash
-\`\`\`
+```
 
 <details>
 <summary>🔧 Manual Installation</summary>
 
 1. **Backup** existing config:
-\`\`\`bash
+```bash
 mv ~/.config/nvim ~/.config/nvim.backup
-\`\`\`
+```
 
 2. **Clone** this configuration:
-\`\`\`bash
+```bash
 git clone https://github.com/yourusername/nvim-config.git ~/.config/nvim
-\`\`\`
+```
 
 3. **Install** Packer:
-\`\`\`bash
+```bash
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-\`\`\`
+```
 
 4. **Sync** plugins:
-\`\`\`vim
+```vim
 :PackerSync
-\`\`\`
+```
 </details>
 
 ## 🗂️ Project Structure
 
-\`\`\`mermaid
+```mermaid
 graph TD
     A[~/.config/nvim] --> B[after/plugin]
     A --> C[lua/vasant]
@@ -128,12 +121,12 @@ graph TD
     C --> H[init.lua]
     C --> I[packer.lua]
     C --> J[...]
-\`\`\`
+```
 
 ## ⌨️ Keybindings
 
 > [!TIP]
-> Press \`space + ?\` in normal mode to open the interactive keybinding cheatsheet!
+> Press `space + ?` in normal mode to open the interactive keybinding cheatsheet!
 
 <details>
 <summary>🌟 Essential Bindings</summary>
@@ -141,16 +134,16 @@ graph TD
 ### General
 | Key | Action | Mode |
 |-----|--------|------|
-| \`<Space>\` | Leader key | Normal |
-| \`<leader>pv\` | File explorer | Normal |
-| \`<leader>s\` | Search & replace | Normal |
+| `<Space>` | Leader key | Normal |
+| `<leader>pv` | File explorer | Normal |
+| `<leader>s` | Search & replace | Normal |
 
 ### Navigation
 | Key | Action | Mode |
 |-----|--------|------|
-| \`<C-p>\` | Fuzzy find files | Normal |
-| \`<C-f>\` | Find in files | Normal |
-| \`<C-e>\` | Recent files | Normal |
+| `<C-p>` | Fuzzy find files | Normal |
+| `<C-f>` | Find in files | Normal |
+| `<C-e>` | Recent files | Normal |
 
 </details>
 
@@ -160,10 +153,10 @@ graph TD
 ### Fuzzy Finding
 | Key | Action |
 |-----|--------|
-| \`<leader>ff\` | Find files |
-| \`<leader>fg\` | Live grep |
-| \`<leader>fb\` | Buffers |
-| \`<leader>fh\` | Help tags |
+| `<leader>ff` | Find files |
+| `<leader>fg` | Live grep |
+| `<leader>fb` | Buffers |
+| `<leader>fh` | Help tags |
 
 </details>
 
@@ -173,10 +166,10 @@ graph TD
 ### Code Navigation
 | Key | Action |
 |-----|--------|
-| \`gd\` | Go to definition |
-| \`K\` | Hover doc |
-| \`<leader>ca\` | Code actions |
-| \`<leader>rn\` | Rename |
+| `gd` | Go to definition |
+| `K` | Hover doc |
+| `<leader>ca` | Code actions |
+| `<leader>rn` | Rename |
 
 </details>
 
@@ -188,8 +181,8 @@ graph TD
 <details>
 <summary>🌈 Theme Customization</summary>
 
-Edit \`after/plugin/colors.lua\`:
-\`\`\`lua
+Edit `after/plugin/colors.lua`:
+```lua
 require('rose-pine').setup({
     variant = 'moon',
     dark_variant = 'main',
@@ -199,21 +192,21 @@ require('rose-pine').setup({
     disable_float_background = false,
     disable_italics = false,
 })
-\`\`\`
+```
 </details>
 
 <details>
 <summary>🔧 LSP Configuration</summary>
 
-Add new language servers in \`after/plugin/lsp.lua\`:
-\`\`\`lua
+Add new language servers in `after/plugin/lsp.lua`:
+```lua
 local servers = {
     'lua_ls',
     'tsserver',
     'rust_analyzer',
     -- Add your servers here
 }
-\`\`\`
+```
 </details>
 
 ## 📦 Plugin List
@@ -239,7 +232,7 @@ local servers = {
 ## 🌟 Language Support
 
 > [!TIP]
-> Use \`:Mason\` to install additional language servers!
+> Use `:Mason` to install additional language servers!
 
 <details>
 <summary>Supported Languages</summary>
@@ -261,9 +254,9 @@ local servers = {
 > Contributions are what make the open-source community amazing! 
 
 1. Fork the Project
-2. Create your Feature Branch (\`git checkout -b feature/AmazingFeature\`)
-3. Commit your Changes (\`git commit -m 'Add some AmazingFeature'\`)
-4. Push to the Branch (\`git push origin feature/AmazingFeature\`)
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
 ## 📜 License
@@ -281,138 +274,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [Join Community](https://discord.gg/yourdiscord)
 
 </div>
-EOL
-
-# Make the file executable
-chmod +x ~/.config/nvim/README.md
-
-echo "README.md has been created in ~/.config/nvim/"# Neovim Configuration
-
-A modern Neovim configuration focused on development with LSP support, fuzzy finding, and git integration.
-
-## Prerequisites
-
-- Neovim >= 0.8.0
-- Git
-- Nerd Font
-- Node.js (for LSP servers)
-- ripgrep (for Telescope grep)
-
-## Installation
-
-1. Backup existing config:
-```bash
-mv ~/.config/nvim ~/.config/nvim.backup
-```
-
-2. Clone this configuration:
-```bash
-git clone https://github.com/yourusername/nvim-config.git ~/.config/nvim
-```
-
-3. Install Packer:
-```bash
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-```
-
-4. Install plugins:
-```vim
-:PackerSync
-```
-
-## Project Structure
-```
-~/.config/nvim/
-├── after/plugin/
-│   ├── colors.lua      # Color scheme configuration
-│   ├── fugitive.lua    # Git commands
-│   ├── harpoon.lua     # Quick file navigation
-│   ├── lsp.lua         # LSP configuration
-│   ├── telescope.lua   # Fuzzy finder
-│   ├── treesitter.lua  # Syntax highlighting
-│   └── undotree.lua    # Undo history
-├── lua/vasant/
-│   ├── init.lua        # Main init
-│   ├── packer.lua      # Plugin definitions
-│   ├── remap.lua       # Key mappings
-│   └── set.lua         # Neovim settings
-└── init.lua            # Entry point
-```
-
-## Key Features
-
-- 🎨 Rose Pine theme with transparent background
-- 📦 LSP support with auto-completion
-- 🔍 Fuzzy finding with Telescope
-- 🌳 Syntax highlighting via Treesitter
-- 📁 Quick file navigation with Harpoon
-- 🔄 Git integration via Fugitive
-- ↩️ Undo history with Undotree
-
-## Keybindings
-
-### General
-- `<Space>` - Leader key
-- `<leader>pv` - Open file explorer
-- `<leader>s` - Search and replace word under cursor
-
-### Movement
-- `J` - Move selected line down (Visual mode)
-- `K` - Move selected line up (Visual mode)
-
-### Telescope
-- `<leader>ff` - Find files
-- `<leader>fg` - Live grep
-- `<leader>fb` - Browse buffers
-- `<leader>fh` - Help tags
-
-### Harpoon
-- `<leader>a` - Add file
-- `<C-e>` - Quick menu
-- `<C-h>` - File 1
-- `<C-t>` - File 2
-- `<C-n>` - File 3
-- `<C-s>` - File 4
-
-### LSP
-- `gd` - Go to definition
-- `K` - Hover documentation
-- `<leader>vws` - Workspace symbol
-- `<leader>vd` - Open diagnostic
-- `[d` - Next diagnostic
-- `]d` - Previous diagnostic
-- `<leader>ca` - Code action
-- `<leader>rr` - References
-- `<leader>rn` - Rename
-
-### Git
-- `<leader>gs` - Git status
-
-### Other
-- `<leader>u` - Toggle Undotree
-
-## Installed Plugins
-
-- Packer - Plugin management
-- Telescope - Fuzzy finder
-- Rose Pine - Color scheme
-- Treesitter - Syntax highlighting
-- Harpoon - File navigation
-- LSP Zero - Language server configuration
-- Mason - LSP package manager
-- nvim-cmp - Completion engine
-- Undotree - Undo history visualization
-- Fugitive - Git integration
-
-## Language Server Setup
-
-Default LSP servers:
-- lua_ls (Lua)
-- tsserver (TypeScript/JavaScript)
-- rust_analyzer (Rust)
-
-To install additional servers:
-1. Open Neovim
-2. Run `:Mason`
-3. Find and install desired language server
