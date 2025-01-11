@@ -5,7 +5,8 @@
 [![Lua](https://img.shields.io/badge/Built%20with-Lua-blue.svg?style=for-the-badge&logo=lua)](https://lua.org)
 [![Neovim](https://img.shields.io/badge/Built%20for-Neovim-green.svg?style=for-the-badge&logo=neovim)](https://neovim.io)
 
-![Neovim Screenshot](https://raw.githubusercontent.com/yourusername/nvim-config/main/assets/screenshot.png)
+![Neovim Screenshot](https://github.com/Vasant-rawat/NeoBegin/blob/main/assets/Screen1.png)
+![Neovim Screenshot](https://github.com/Vasant-rawat/NeoBegin/blob/main/assets/Screen2.png)
 
 *A supercharged ⚡ Neovim configuration for the modern developer*
 
