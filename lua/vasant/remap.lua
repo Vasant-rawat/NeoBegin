@@ -12,3 +12,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")--
 
+--To format lsp buffer
+vim.keymap.set("n", "<leader>f", function()
+    vim.cmd("LspZeroFormat")
+end, { desc = "LSP Zero Format" })

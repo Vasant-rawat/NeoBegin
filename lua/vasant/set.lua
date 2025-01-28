@@ -30,13 +30,12 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('highlight_yank', {}),
-  desc = 'Hightlight selection on yank',
-  pattern = '*',
+-- Create an autocommand group for highlighting yanked text
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("highlight_yank", {}),
+  desc = "Highlight selection on yank",
+  pattern = "*",
   callback = function()
-    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 100}
+    vim.highlight.on_yank { higroup = "IncSearch", timeout = 100 }
   end,
 })
-
-
