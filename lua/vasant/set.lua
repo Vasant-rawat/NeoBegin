@@ -1,7 +1,11 @@
 vim.opt.guicursor = ""
 
-vim.opt.nu = true
+-- Line numbers
+vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.numberwidth = 4
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
