@@ -89,6 +89,18 @@
 - **LSP Definition**: `gd` to go to definition
 - **LSP References**: `gr` to show references
 
+### Tab Management
+- **Navigate Tabs**:
+  - `<Tab>` - Go to next tab
+  - `<S-Tab>` - Go to previous tab
+  - `<Leader>1-5` - Go to tab 1-5
+  - `<Leader>$` - Go to last tab
+- **Tab Operations**:
+  - `<Leader>x` - Pick tab to close
+  - `<Leader>X` - Close other tabs
+  - `<Leader>p` - Pick tab to switch to
+  - `<Leader>tp` - Toggle pin current tab
+
 ## 📂 Structure
 
 ```markdown
@@ -208,37 +220,184 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) for the beautiful theme
 - All plugin authors for their contributions
 
-```markdown
-        ~/.config/nvim/
-        ├── init.lua
-        ├── lua/
-        │   ├── vasant/
-        │   │   ├── init.lua
-        │   │   ├── pckr.lua
-        │   │   ├── remap.lua
-        │   │   ├── set.lua
-        │   │   └── plugins/
-        │   │       ├── colors.lua
-        │   │       ├── fugitive.lua
-        │   │       ├── harpoon.lua
-        │   │       ├── lsp.lua
-        │   │       ├── neotree.lua
-        │   │       ├── telescope.lua
-        │   │       ├── treesitter.lua
-        │   │       ├── undotree.lua
-        │   │       └── floatingTerminal.lua
+# Vasant's Neovim Configuration
 
+A modern, clean, and efficient Neovim configuration built with Lazy.nvim.
+
+## ⌨️ Keybindings
+
+### File Navigation
+- **File Explorer (Neo-tree)**:
+  - `<leader>e` - Toggle file explorer
+  - `<leader>o` - Focus file explorer
+  - `h` - Close node/go to parent
+  - `l` - Open node/file with window picker
+  - `v` - Open in vertical split
+  - `s` - Open in horizontal split
+  - `t` - Open in new tab
+  - `<cr>` or `o` - Open in new tab
+  - `O` - Open with window picker
+
+### Tab Management
+- **Navigation**:
+  - `<Tab>` - Next tab
+  - `<S-Tab>` - Previous tab
+  - `<Leader>1-5` - Go to tab 1-5
+  - `<Leader>$` - Go to last tab
+- **Operations**:
+  - `<Leader>x` - Pick tab to close
+  - `<Leader>X` - Close other tabs
+  - `<Leader>p` - Pick tab to switch to
+  - `<Leader>tp` - Toggle pin current tab
+  - `<Leader>tn` - Create new tab
+
+### LSP Features
+- **Code Navigation**:
+  - `gd` - Go to definition
+  - `K` - Show hover information
+  - `<leader>vws` - Workspace symbol search
+  - `<leader>vd` - Show diagnostics float
+  - `[d` - Next diagnostic
+  - `]d` - Previous diagnostic
+  - `<leader>vca` - Code actions
+  - `<leader>vrr` - Show references
+  - `<leader>vrn` - Rename symbol
+  - `<C-h>` - Show signature help (in insert mode)
+
+### Completion
+- **Code Completion**:
+  - `<C-p>` - Select previous item
+  - `<C-n>` - Select next item
+  - `<C-y>` or `<CR>` - Confirm selection
+  - `<C-Space>` - Trigger completion
+  - `<Tab>` - Next item/expand snippet
+  - `<S-Tab>` - Previous item
+
+### AI Assistant (Codeium)
+- **AI Suggestions**:
+  - `<C-g>` - Accept suggestion
+  - `<C-;>` - Next suggestion
+  - `<C-,>` - Previous suggestion
+  - `<C-x>` - Clear suggestions
+
+### File Operations (in Neo-tree)
+- **File Management**:
+  - `a` - Add file
+  - `A` - Add directory
+  - `d` - Delete
+  - `r` - Rename
+  - `y` - Copy to clipboard
+  - `x` - Cut to clipboard
+  - `p` - Paste from clipboard
+  - `c` - Copy
+  - `m` - Move
+  - `q` - Close window
+  - `R` - Refresh
+  - `?` - Show help
+
+### Other Tools
+- **Git**:
+  - `<leader>gs` - Git status
+- **Undo Tree**:
+  - `<leader>u` - Toggle undo tree
+- **Terminal**:
+  - Built-in terminal support (ToggleTerm)
+
+## Features
+
+### Core Features
+- **Modern UI**: Clean and minimal interface with Tokyo Night theme
+- **File Explorer**: Neo-tree with intuitive navigation and file operations
+- **Status Line**: Lualine with custom styling
+- **Buffer Management**: Bufferline for tab-like buffer navigation
+- **Indent Guides**: Visual indent guides with scope highlighting
+- **Color Preview**: Real-time color code highlighting
+- **Fuzzy Finder**: Telescope for efficient file and content search
+- **Git Integration**: Fugitive for Git operations
+- **Terminal**: ToggleTerm for integrated terminal access
+- **Undo History**: Visual undo tree
+
+### Enhanced Development Features
+- **Advanced Syntax Highlighting**: 
+  - Treesitter with support for multiple languages
+  - Incremental selection and text object manipulation
+  - Better error and warning highlighting
+- **LSP and Autocompletion**:
+  - Language Server Protocol support
+  - Intelligent code completion
+  - Snippet support
+  - Code actions and diagnostics
+- **AI Code Assistant**:
+  - Codeium integration for AI-powered code suggestions
+  - Smart code completion
+  - Context-aware suggestions
+- **Diagnostics and Troubleshooting**:
+  - Trouble.nvim for better error visualization
+  - Quick navigation to errors and warnings
+  - Workspace diagnostics
+
+### Key Features
+- **File Explorer**:
+  - `<leader>e` - Toggle file explorer
+  - `<leader>o` - Focus file explorer
+  - Intuitive navigation with `h`, `l`, `v`, `s`
+  - File operations: add, delete, rename, copy, paste
+  - Auto-close on file open
+
+- **AI Code Assistant**:
+  - `<C-g>` - Accept suggestion
+  - `<C-;>` - Next suggestion
+  - `<C-,>` - Previous suggestion
+  - `<C-x>` - Clear suggestions
+
+- **Diagnostics**:
+  - `<leader>xx` - Toggle trouble window
+  - `<leader>xw` - Show workspace diagnostics
+  - `<leader>xd` - Show document diagnostics
+  - `<leader>xq` - Show quickfix list
+  - `<leader>xl` - Show loclist
+
+## Installation
+
+1. Clone this repository:
+```bash
+git clone https://github.com/yourusername/nvim-config.git ~/.config/nvim
 ```
 
+2. Install dependencies:
+```bash
+# Install Lazy.nvim
+git clone --filter=blob:none https://github.com/folke/lazy.nvim.git --branch=stable ~/.local/share/nvim/lazy/lazy.nvim
+```
 
+3. Start Neovim and let Lazy.nvim install the plugins:
+```bash
+nvim
+```
 
+## Requirements
 
+- Neovim 0.9.0 or higher
+- Git
+- A Nerd Font (recommended for icons)
 
+## Customization
 
+The configuration is modular and easy to customize. Key files:
+- `lua/vasant/lazy.lua` - Plugin configuration
+- `lua/vasant/remap.lua` - Key mappings
+- `lua/vasant/set.lua` - Settings
 
+## License
 
+MIT
 
-
-
-
-
+### Visual Features
+- Tab indicators for modified files
+- LSP diagnostics in tabs
+- File icons and Git status
+- Hover preview
+- Slanted separators for modern look
+- Auto-truncation for long filenames
+- Special section for file explorer
+- Tab pinning support
