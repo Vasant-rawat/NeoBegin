@@ -13,20 +13,22 @@
 [Key Features](#-key-features) •
 [Quick Start](#-quick-start) •
 [Keybindings](#-keybindings) •
-[Customization](#-customization)
+[Customization](#-customization) •
+[Structure](#-structure)
 
 </div>
 
 ## 🚀 Key Features
 
-- **Plugin Management**: Managed by `pckr.nvim`
-- **Autocompletion**: Powered by `nvim-cmp`
-- **File Navigation**: `nvim-tree` and `telescope.nvim`
+- **Plugin Management**: Managed by `lazy.nvim` (Modern and fast plugin manager)
+- **Autocompletion**: Powered by `nvim-cmp` with `LuaSnip`
+- **File Navigation**: `neo-tree` and `telescope.nvim`
 - **Syntax Highlighting**: `nvim-treesitter`
 - **Git Integration**: `vim-fugitive`
 - **LSP Support**: `nvim-lspconfig` with `mason.nvim` and `lsp-zero.nvim`
 - **Terminal Integration**: `toggleterm.nvim`
 - **Undo History**: `undotree`
+- **Modern UI**: `tokyonight.nvim` theme with `lualine.nvim` and `bufferline.nvim`
 
 ## ⚡ Quick Start
 
@@ -35,23 +37,18 @@
     git clone https://github.com/Vasant-rawat/NeoBegin.git ~/.config/nvim
     ```
 
-2. **Install `pckr.nvim`**:
-    ```bash
-    git clone --filter=blob:none https://github.com/lewis6991/pckr.nvim ~/.local/share/nvim/site/pack/pckr/start/pckr.nvim
-    ```
-
-3. **Start Neovim**:
+2. **Start Neovim**:
     ```bash
     nvim
     ```
 
-4. **Sync plugins**:
+3. **Sync plugins**:
     Inside Neovim, run:
     ```vim
-    :PckrSync
+    :Lazy sync
     ```
 
-5. **Verify installation**:
+4. **Verify installation**:
     Inside Neovim, run:
     ```vim
     :checkhealth
@@ -59,7 +56,7 @@
 
 ## 🎹 Keybindings
 
-- **File Explorer**: `<leader>e` to toggle `nvim-tree`
+- **File Explorer**: `<leader>e` to toggle `neo-tree`
 - **Find Files**: `<leader>ff` to open `telescope.nvim` file finder
 - **Live Grep**: `<leader>fg` to search text in files
 - **Buffers**: `<leader>fb` to list open buffers
@@ -68,7 +65,58 @@
 - **Undo Tree**: `<leader>u` to toggle `undotree`
 - **Terminal**: `<C-\>` to open a floating terminal
 
-## 📂 Directory Structure
+## 📂 Structure
+
+```markdown
+~/.config/nvim/
+├── init.lua              # Main entry point
+├── lazy-lock.json        # Plugin version lock file
+└── lua/
+    └── vasant/
+        ├── init.lua      # Core configuration loader
+        ├── lazy.lua      # Plugin configurations
+        ├── remap.lua     # Key mappings
+        └── set.lua       # General settings
+```
+
+## 🎨 Customization
+
+### Colorscheme
+The configuration uses `tokyonight.nvim` as the default colorscheme. You can change it by modifying the theme in `lua/vasant/lazy.lua`.
+
+Available variants:
+- `tokyonight-night` (default)
+- `tokyonight-storm`
+- `tokyonight-day`
+- `tokyonight-moon`
+
+### Adding New Plugins
+To add new plugins, edit `lua/vasant/lazy.lua` and add your plugin configuration following the same pattern:
+
+```lua
+{
+    "username/plugin-name",
+    config = function()
+        -- Plugin configuration here
+    end,
+    dependencies = {
+        -- Dependencies here
+    }
+}
+```
+
+### Keybindings
+Customize keybindings in `lua/vasant/remap.lua`. The configuration uses `<leader>` as the main prefix key.
+
+## 🛠️ Requirements
+
+- Neovim >= 0.9.0
+- Git
+- A Nerd Font (recommended for icons)
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ```markdown
         ~/.config/nvim/
