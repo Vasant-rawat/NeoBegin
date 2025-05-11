@@ -18,15 +18,18 @@ require("lazy").setup({
     { "MunifTanjim/nui.nvim" },
 
     -- ColorScheme
-    {
-        "folke/tokyonight.nvim",
+    { 
+        'olivercederborg/poimandres.nvim',
+        lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd.colorscheme("tokyonight")
-            vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
+            require('poimandres').setup {
+            }
         end,
+        init = function()
+            vim.cmd("colorscheme poimandres")
+        end
     },
-
     -- Status Line
     {
         "nvim-lualine/lualine.nvim",
@@ -34,7 +37,7 @@ require("lazy").setup({
         config = function()
             require("lualine").setup({
                 options = {
-                    theme = "tokyonight",
+                    theme = "poimandres",
                     component_separators = { left = "|", right = "|" },
                     section_separators = { left = "", right = "" },
                 },
@@ -118,7 +121,6 @@ require("lazy").setup({
                     }
                 },
             })
-
             -- Auto-create new tabs for new files
             local function create_new_tab()
                 vim.cmd('tabnew %')
@@ -491,4 +493,56 @@ require("lazy").setup({
             })
         end
     },
+   {
+  "goolord/alpha-nvim",
+  event = "VimEnter",
+  config = function()
+    local alpha = require("alpha")
+    local dashboard = require("alpha.themes.dashboard")
+
+    -- Set header
+    dashboard.section.header.val = {
+  	[[   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣭⣿⣶⣿⣦⣼⣆         ]],
+  	[[    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ]],
+  	[[          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷⠄⠄⠄⠄⠻⠿⢿⣿⣧⣄     ]],
+  	[[           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ]],
+  	[[          ⢠⣿⣿⣿⠈  ⠡⠌⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ]],
+  	[[   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘⠄ ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ]],
+  	[[  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ]],
+  	[[ ⣠⣿⠿⠛⠄⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ]],
+    [[ ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇⠄⠛⠻⢷⣄ ]],
+    [[      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ]],
+    [[       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ]],
+    }
+
+    -- Set menu
+    dashboard.section.buttons.val = {
+      dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
+      dashboard.button("SPC ee", "  > Toggle file explorer", "<cmd>NvimTreeToggle<CR>"),
+      dashboard.button("SPC ff", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
+      dashboard.button("SPC fs", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
+      dashboard.button("SPC wr", "󰁯  > Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
+      dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),
+    }
+
+    -- Send config to alpha
+    alpha.setup(dashboard.opts)
+
+    -- Disable folding on alpha buffer
+    vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
+  end,
+},
+    {
+  "folke/which-key.nvim",
+  event = "VeryLazy",
+  init = function()
+    vim.o.timeout = true
+    vim.o.timeoutlen = 500
+  end,
+  opts = {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  },
+},
 }) 
