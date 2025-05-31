@@ -28,12 +28,17 @@
 - **File Navigation**: `neo-tree` and `telescope.nvim`
 - **Syntax Highlighting**: `nvim-treesitter`
 - **Git Integration**: `vim-fugitive`
+- **Enhanced Git Integration**: `gitsigns.nvim` for inline git decorations and hunk operations.
 - **LSP Support**: `nvim-lspconfig` with `mason.nvim` and `lsp-zero.nvim`
 - **Terminal Integration**: `toggleterm.nvim`
 - **Undo History**: `undotree`
-- **Modern UI**: `tokyonight.nvim` theme with `lualine.nvim` and `bufferline.nvim`
+- **Modern UI**: `poimandres.nvim` theme with `lualine.nvim` and `bufferline.nvim`
 - **Indent Guides**: `indent-blankline.nvim` for better code readability
 - **Color Highlighting**: `nvim-colorizer.lua` for CSS and color codes
+- **Effortless Commenting**: `Comment.nvim` for quick code commenting.
+- **Auto Pairing**: `nvim-autopairs` for automatic bracket and quote closing.
+- **Session Management**: `auto-session` for saving and restoring sessions.
+- **Smooth Scrolling**: `nvim-scrollbar` for visual scrollbars.
 
 ## ⚡ Quick Start
 
@@ -68,26 +73,79 @@
 
 ## 🎹 Keybindings
 
-### Navigation
-- **File Explorer**: `<leader>e` to toggle `neo-tree`
-- **Find Files**: `<leader>ff` to open `telescope.nvim` file finder
-- **Live Grep**: `<leader>fg` to search text in files
-- **Buffers**: `<leader>fb` to list open buffers
-- **Help Tags**: `<leader>fh` to find help tags
-- **Recent Files**: `<leader>fr` to find recently opened files
+### Navigation & File Explorer (Neo-tree)
+- **Toggle File Explorer**: `<leader>e`
+- **Focus File Explorer**: `<leader>o`
+- **Inside Neo-tree:**
+  - `h` - Close node / Go to parent directory
+  - `l` - Open node / Enter directory
+  - `v` - Open in vertical split
+  - `s` - Open in horizontal split
+  - `t` - Open in new tab
+  - `<cr>` or `o` - Open file in new tab (respects `neo-tree` config)
+  - `O` - Open file with window picker (respects `neo-tree` config)
+  - `a` - Add file/directory
+  - `A` - Add directory (alternative)
+  - `d` - Delete file/directory
+  - `r` - Rename file/directory
+  - `y` - Copy path to clipboard
+  - `x` - Cut file/directory to clipboard
+  - `p` - Paste from clipboard
+  - `c` - Copy file/directory (internal Neo-tree copy)
+  - `m` - Move file/directory
+  - `q` - Close Neo-tree window
+  - `R` - Refresh Neo-tree
+  - `?` - Show help/keybindings within Neo-tree
 
-### Git
-- **Git Status**: `<leader>gs` to open `vim-fugitive` Git status
-- **Git Blame**: `<leader>gb` to show Git blame
-- **Git Diff**: `<leader>gd` to show Git diff
+### Telescope (Fuzzy Finding)
+- **Find Files**: `<leader>ff`
+- **Live Grep**: `<leader>fg`
+- **Buffers**: `<leader>fb`
+- **Help Tags**: `<leader>fh`
+- **Recent Files**: `<leader>fr`
 
-### Other
-- **Undo Tree**: `<leader>u` to toggle `undotree`
-- **Terminal**: `<C-\>` to open a floating terminal
-- **Format Code**: `<leader>f` to format current buffer
-- **LSP Hover**: `K` to show hover information
-- **LSP Definition**: `gd` to go to definition
-- **LSP References**: `gr` to show references
+### Git (vim-fugitive & gitsigns.nvim)
+- **vim-fugitive Git Status**: `<leader>gs`
+- **vim-fugitive Git Blame**: `<leader>gb`
+- **vim-fugitive Git Diff**: `<leader>gd`
+
+#### Gitsigns
+- `]c` - Next hunk
+- `[c` - Previous hunk
+- `<leader>hs` - Stage hunk
+- `<leader>hr` - Reset hunk
+- `<leader>hS` - Stage buffer
+- `<leader>hu` - Undo stage hunk
+- `<leader>hR` - Reset buffer
+- `<leader>hp` - Preview hunk
+- `<leader>hb` - Blame line (full)
+- `<leader>tb` - Toggle current line blame
+- `<leader>hd` - Diff this
+- `<leader>hD` - Diff this ~
+- `ih` (in visual/operator pending mode) - Select hunk text object
+
+### Commenting (Comment.nvim)
+- `gcc` - Toggle comment for current line (Normal mode)
+- `gc` - Toggle comment for selection (Visual mode)
+
+### Session Management (auto-session)
+- `<leader>ws` - Save session for current directory
+- `<leader>wr` - Restore session for current directory
+
+### LSP Actions
+- **LSP Hover**: `K`
+- **LSP Definition**: `gd`
+- **LSP References**: `gr`
+- **Code Actions**: `<leader>ca`
+- **Rename Symbol**: `<leader>rn`
+- **Show Diagnostics**: `<leader>d` (float)
+- **Next Diagnostic**: `]d`
+- **Previous Diagnostic**: `[d`
+
+### Other Tools
+- **Undo Tree**: `<leader>u`
+- **Terminal**: `<C-\>` (toggle floating terminal)
+- **Format Code**: `<leader>f` (uses LSP)
 
 ### Tab Management
 - **Navigate Tabs**:
@@ -120,35 +178,43 @@
 ### Core
 - **lazy.nvim**: Modern plugin manager
 - **plenary.nvim**: Required by many plugins
-- **nvim-web-devicons**: File icons
-- **nui.nvim**: UI components
+- **nvim-web-devicons**: File icons for UI elements
+- **nui.nvim**: UI components library (used by other plugins)
 
 ### UI
-- **tokyonight.nvim**: Modern color scheme
-- **lualine.nvim**: Status line
-- **bufferline.nvim**: Buffer tabs
-- **indent-blankline.nvim**: Indent guides
-- **nvim-colorizer.lua**: Color highlighting
+- **poimandres.nvim**: Modern, elegant color scheme.
+- **lualine.nvim**: Feature-rich status line.
+- **bufferline.nvim**: Advanced buffer/tab management. Includes tab indicators for modified files, LSP diagnostics, file icons, hover preview, slanted separators, auto-truncation for long filenames, a special section for the file explorer, and tab pinning support.
+- **indent-blankline.nvim**: Visual indent guides.
+- **nvim-colorizer.lua**: Highlights color codes (e.g., hex, rgb) in files.
+- **nvim-scrollbar**: Smooth scrollbar integration.
 
 ### Navigation
-- **neo-tree**: File explorer
-- **telescope.nvim**: Fuzzy finder
-- **harpoon**: Quick file navigation
+- **neo-tree**: Powerful and configurable file explorer.
+- **telescope.nvim**: Highly extendable fuzzy finder for files, buffers, grep, etc.
+- **harpoon**: Quick file marking and navigation system.
 
-### Development
-- **nvim-treesitter**: Syntax highlighting
-- **nvim-lspconfig**: LSP configuration
-- **mason.nvim**: LSP installer
-- **lsp-zero.nvim**: LSP setup helper
-- **nvim-cmp**: Autocompletion
-- **LuaSnip**: Snippets
+### Development & Coding Aids
+- **nvim-treesitter**: Advanced syntax highlighting, code parsing, and text objects.
+- **nvim-lspconfig**: Configurations for the Neovim LSP client.
+- **mason.nvim**: Manages LSP servers, DAP servers, linters, and formatters.
+- **lsp-zero.nvim**: Simplifies LSP setup and configuration.
+  - *Note: Includes support for Lua (lua_ls), TypeScript/JavaScript (tsserver), ESLint, Go (gopls), Bash (bashls), HTML (html), CSS (cssls), and Tailwind CSS (tailwindcss).*
+- **nvim-cmp**: Powerful autocompletion engine.
+- **LuaSnip**: Snippet engine for `nvim-cmp`.
+- **Comment.nvim**: Context-aware commenting plugin, supports various comment styles.
+- **nvim-autopairs**: Automatically closes pairs of brackets, quotes, etc.
 
-### Git
-- **vim-fugitive**: Git integration
-- **gitsigns.nvim**: Git signs in gutter
+### Git Integration
+- **vim-fugitive**: A classic Git wrapper for Neovim.
+- **gitsigns.nvim**: Displays Git signs in the gutter, allows hunk operations (staging, resetting, previewing), shows blame information, and enables diffing.
 
 ### Terminal
-- **toggleterm.nvim**: Terminal integration
+- **toggleterm.nvim**: Manages embedded terminals within Neovim.
+
+### Utility & Workflow
+- **undotree**: Visualizes and navigates the undo history.
+- **auto-session**: Automatically saves and restores sessions.
 
 ## 🎨 Customization
 
@@ -217,187 +283,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - [lazy.nvim](https://github.com/folke/lazy.nvim) for the amazing plugin manager
-- [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) for the beautiful theme
-- All plugin authors for their contributions
-
-# Vasant's Neovim Configuration
-
-A modern, clean, and efficient Neovim configuration built with Lazy.nvim.
-
-## ⌨️ Keybindings
-
-### File Navigation
-- **File Explorer (Neo-tree)**:
-  - `<leader>e` - Toggle file explorer
-  - `<leader>o` - Focus file explorer
-  - `h` - Close node/go to parent
-  - `l` - Open node/file with window picker
-  - `v` - Open in vertical split
-  - `s` - Open in horizontal split
-  - `t` - Open in new tab
-  - `<cr>` or `o` - Open in new tab
-  - `O` - Open with window picker
-
-### Tab Management
-- **Navigation**:
-  - `<Tab>` - Next tab
-  - `<S-Tab>` - Previous tab
-  - `<Leader>1-5` - Go to tab 1-5
-  - `<Leader>$` - Go to last tab
-- **Operations**:
-  - `<Leader>x` - Pick tab to close
-  - `<Leader>X` - Close other tabs
-  - `<Leader>p` - Pick tab to switch to
-  - `<Leader>tp` - Toggle pin current tab
-  - `<Leader>tn` - Create new tab
-
-### LSP Features
-- **Code Navigation**:
-  - `gd` - Go to definition
-  - `K` - Show hover information
-  - `<leader>vws` - Workspace symbol search
-  - `<leader>vd` - Show diagnostics float
-  - `[d` - Next diagnostic
-  - `]d` - Previous diagnostic
-  - `<leader>vca` - Code actions
-  - `<leader>vrr` - Show references
-  - `<leader>vrn` - Rename symbol
-  - `<C-h>` - Show signature help (in insert mode)
-
-### Completion
-- **Code Completion**:
-  - `<C-p>` - Select previous item
-  - `<C-n>` - Select next item
-  - `<C-y>` or `<CR>` - Confirm selection
-  - `<C-Space>` - Trigger completion
-  - `<Tab>` - Next item/expand snippet
-  - `<S-Tab>` - Previous item
-
-### AI Assistant (Codeium)
-- **AI Suggestions**:
-  - `<C-g>` - Accept suggestion
-  - `<C-;>` - Next suggestion
-  - `<C-,>` - Previous suggestion
-  - `<C-x>` - Clear suggestions
-
-### File Operations (in Neo-tree)
-- **File Management**:
-  - `a` - Add file
-  - `A` - Add directory
-  - `d` - Delete
-  - `r` - Rename
-  - `y` - Copy to clipboard
-  - `x` - Cut to clipboard
-  - `p` - Paste from clipboard
-  - `c` - Copy
-  - `m` - Move
-  - `q` - Close window
-  - `R` - Refresh
-  - `?` - Show help
-
-### Other Tools
-- **Git**:
-  - `<leader>gs` - Git status
-- **Undo Tree**:
-  - `<leader>u` - Toggle undo tree
-- **Terminal**:
-  - Built-in terminal support (ToggleTerm)
-
-## Features
-
-### Core Features
-- **Modern UI**: Clean and minimal interface with Tokyo Night theme
-- **File Explorer**: Neo-tree with intuitive navigation and file operations
-- **Status Line**: Lualine with custom styling
-- **Buffer Management**: Bufferline for tab-like buffer navigation
-- **Indent Guides**: Visual indent guides with scope highlighting
-- **Color Preview**: Real-time color code highlighting
-- **Fuzzy Finder**: Telescope for efficient file and content search
-- **Git Integration**: Fugitive for Git operations
-- **Terminal**: ToggleTerm for integrated terminal access
-- **Undo History**: Visual undo tree
-
-### Enhanced Development Features
-- **Advanced Syntax Highlighting**: 
-  - Treesitter with support for multiple languages
-  - Incremental selection and text object manipulation
-  - Better error and warning highlighting
-- **LSP and Autocompletion**:
-  - Language Server Protocol support
-  - Intelligent code completion
-  - Snippet support
-  - Code actions and diagnostics
-- **AI Code Assistant**:
-  - Codeium integration for AI-powered code suggestions
-  - Smart code completion
-  - Context-aware suggestions
-- **Diagnostics and Troubleshooting**:
-  - Trouble.nvim for better error visualization
-  - Quick navigation to errors and warnings
-  - Workspace diagnostics
-
-### Key Features
-- **File Explorer**:
-  - `<leader>e` - Toggle file explorer
-  - `<leader>o` - Focus file explorer
-  - Intuitive navigation with `h`, `l`, `v`, `s`
-  - File operations: add, delete, rename, copy, paste
-  - Auto-close on file open
-
-- **AI Code Assistant**:
-  - `<C-g>` - Accept suggestion
-  - `<C-;>` - Next suggestion
-  - `<C-,>` - Previous suggestion
-  - `<C-x>` - Clear suggestions
-
-- **Diagnostics**:
-  - `<leader>xx` - Toggle trouble window
-  - `<leader>xw` - Show workspace diagnostics
-  - `<leader>xd` - Show document diagnostics
-  - `<leader>xq` - Show quickfix list
-  - `<leader>xl` - Show loclist
-
-## Installation
-
-1. Clone this repository:
-```bash
-git clone https://github.com/yourusername/nvim-config.git ~/.config/nvim
-```
-
-2. Install dependencies:
-```bash
-# Install Lazy.nvim
-git clone --filter=blob:none https://github.com/folke/lazy.nvim.git --branch=stable ~/.local/share/nvim/lazy/lazy.nvim
-```
-
-3. Start Neovim and let Lazy.nvim install the plugins:
-```bash
-nvim
-```
-
-## Requirements
-
-- Neovim 0.9.0 or higher
-- Git
-- A Nerd Font (recommended for icons)
-
-## Customization
-
-The configuration is modular and easy to customize. Key files:
-- `lua/vasant/lazy.lua` - Plugin configuration
-- `lua/vasant/remap.lua` - Key mappings
-- `lua/vasant/set.lua` - Settings
-
-## License
-
-MIT
-
-### Visual Features
-- Tab indicators for modified files
-- LSP diagnostics in tabs
-- File icons and Git status
-- Hover preview
-- Slanted separators for modern look
-- Auto-truncation for long filenames
-- Special section for file explorer
-- Tab pinning support
+- `poimandres.nvim` and other theme creators for beautiful themes.
+- All plugin authors for their invaluable contributions to the Neovim ecosystem.

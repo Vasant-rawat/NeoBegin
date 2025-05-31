@@ -102,10 +102,3 @@ vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc = "Navigate t
 
 -- Completion keymaps are handled in the cmp setup in lazy.lua
 
-
-
-
-
-vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Toggle file explorer" })
-vim.keymap.set("n", "<leader>o", "<cmd>Neotree focus <CR>", { desc = "Find files" })
-
