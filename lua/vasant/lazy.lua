@@ -1,15 +1,16 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
+
 
 require("lazy").setup({
     -- Core dependencies
@@ -17,17 +18,30 @@ require("lazy").setup({
     { "nvim-tree/nvim-web-devicons" },
     { "MunifTanjim/nui.nvim" },
 
-    -- ColorScheme
-    { 
-        'olivercederborg/poimandres.nvim',
-        lazy = false,
-        priority = 1000,
+
+
+
+    {
+        "sphamba/smear-cursor.nvim",
+        opts = {
+            stiffness = 0.8,                      -- 0.6      [0, 1]
+            trailing_stiffness = 0.5,             -- 0.4      [0, 1]
+            stiffness_insert_mode = 0.7,          -- 0.5      [0, 1]
+            trailing_stiffness_insert_mode = 0.7, -- 0.5      [0, 1]
+            damping = 0.8,                        -- 0.65     [0, 1]
+            damping_insert_mode = 0.8,            -- 0.7      [0, 1]
+            distance_stop_animating = 0.5,        -- 0.1      > 0
+
+        },
+    },
+
+    --Colors
+    {
+        "vague2k/vague.nvim",
         config = function()
-            require('poimandres').setup {
-            }
-        end,
-        init = function()
-            vim.cmd("colorscheme poimandres")
+            --require("vague").setup({ transparent = true })
+            vim.cmd("colorscheme vague")
+            vim.cmd(":hi statusline guibg=NONE")
         end
     },
     -- Status Line
@@ -52,10 +66,10 @@ require("lazy").setup({
         dependencies = "nvim-tree/nvim-web-devicons",
         config = function()
             vim.opt.sessionoptions = "buffers,curdir,folds,help,tabpages,terminal,globals"
-            
+
             -- Set up tab behavior
-            vim.o.hidden = true  -- Allow buffers to be hidden without saving
-            
+            vim.o.hidden = true -- Allow buffers to be hidden without saving
+
             require("bufferline").setup({
                 options = {
                     mode = "tabs",
@@ -82,7 +96,7 @@ require("lazy").setup({
                     hover = {
                         enabled = true,
                         delay = 200,
-                        reveal = {'close'}
+                        reveal = { 'close' }
                     },
                     indicator = {
                         icon = '▎',
@@ -249,6 +263,22 @@ require("lazy").setup({
         end,
     },
 
+    -- lazy.nvim
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- add any options here
+        },
+        dependencies = {
+            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+            "MunifTanjim/nui.nvim",
+            -- OPTIONAL:
+            --   `nvim-notify` is only needed, if you want to use the notification view.
+            --   If not available, we use `mini` as the fallback
+            "rcarriga/nvim-notify",
+        }
+    },
     -- Treesitter
     {
         "nvim-treesitter/nvim-treesitter",
@@ -294,18 +324,6 @@ require("lazy").setup({
         end,
     },
 
-    -- AI Code Assistant
-    {
-        "Exafunction/codeium.vim",
-        event = "BufEnter",
-        config = function()
-            vim.g.codeium_disable_bindings = 1
-            vim.keymap.set('i', '<C-g>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-            vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
-            vim.keymap.set('i', '<C-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
-            vim.keymap.set('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
-        end,
-    },
 
     -- Better Syntax Highlighting
     {
@@ -326,18 +344,18 @@ require("lazy").setup({
                     close = "q",
                     cancel = "<esc>",
                     refresh = "r",
-                    jump = {"<cr>", "<tab>"},
-                    open_split = {"<c-x>"},
-                    open_vsplit = {"<c-v>"},
-                    open_tab = {"<c-t>"},
-                    jump_close = {"o"},
+                    jump = { "<cr>", "<tab>" },
+                    open_split = { "<c-x>" },
+                    open_vsplit = { "<c-v>" },
+                    open_tab = { "<c-t>" },
+                    jump_close = { "o" },
                     toggle_mode = "m",
                     toggle_preview = "P",
                     hover = "K",
                     preview = "p",
-                    close_folds = {"zM", "zm"},
-                    open_folds = {"zR", "zr"},
-                    toggle_fold = {"zA", "za"},
+                    close_folds = { "zM", "zm" },
+                    open_folds = { "zR", "zr" },
+                    toggle_fold = { "zA", "za" },
                     previous = "k",
                     next = "j"
                 },
@@ -387,21 +405,21 @@ require("lazy").setup({
         priority = 500,
         dependencies = {
             -- LSP Support
-            {'neovim/nvim-lspconfig'},
-            {'williamboman/mason.nvim'},
-            {'williamboman/mason-lspconfig.nvim'},
+            { 'neovim/nvim-lspconfig' },
+            { 'williamboman/mason.nvim' },
+            { 'williamboman/mason-lspconfig.nvim' },
 
             -- Autocompletion
-            {'hrsh7th/nvim-cmp'},
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'hrsh7th/cmp-buffer'},
-            {'hrsh7th/cmp-path'},
-            {'saadparwaiz1/cmp_luasnip'},
-            {'hrsh7th/cmp-nvim-lua'},
+            { 'hrsh7th/nvim-cmp' },
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-path' },
+            { 'saadparwaiz1/cmp_luasnip' },
+            { 'hrsh7th/cmp-nvim-lua' },
 
             -- Snippets
-            {'L3MON4D3/LuaSnip'},
-            {'rafamadriz/friendly-snippets'},
+            { 'L3MON4D3/LuaSnip' },
+            { 'rafamadriz/friendly-snippets' },
         },
         config = function()
             -- Initialize Mason first
@@ -423,7 +441,7 @@ require("lazy").setup({
 
             lsp_zero.on_attach(function(client, bufnr)
                 -- LSP keybindings
-                local opts = {buffer = bufnr, remap = false}
+                local opts = { buffer = bufnr, remap = false }
                 vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
                 vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
                 vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
@@ -441,7 +459,7 @@ require("lazy").setup({
 
             -- Completion Setup
             local cmp = require('cmp')
-            local cmp_select = {behavior = cmp.SelectBehavior.Select}
+            local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
             -- Load snippets
             require('luasnip.loaders.from_vscode').lazy_load()
@@ -457,10 +475,10 @@ require("lazy").setup({
                     documentation = cmp.config.window.bordered(),
                 },
                 sources = {
-                    {name = 'nvim_lsp'},
-                    {name = 'luasnip'},
-                    {name = 'buffer'},
-                    {name = 'path'},
+                    { name = 'nvim_lsp' },
+                    { name = 'luasnip' },
+                    { name = 'buffer' },
+                    { name = 'path' },
                 },
                 formatting = lsp_zero.cmp_format(),
                 mapping = cmp.mapping.preset.insert({
@@ -478,7 +496,7 @@ require("lazy").setup({
                         else
                             fallback()
                         end
-                    end, {'i', 's'}),
+                    end, { 'i', 's' }),
                     ['<S-Tab>'] = cmp.mapping(function(fallback)
                         local luasnip = require('luasnip')
                         if cmp.visible() then
@@ -488,61 +506,61 @@ require("lazy").setup({
                         else
                             fallback()
                         end
-                    end, {'i', 's'}),
+                    end, { 'i', 's' }),
                 }),
             })
         end
     },
-   {
-  "goolord/alpha-nvim",
-  event = "VimEnter",
-  config = function()
-    local alpha = require("alpha")
-    local dashboard = require("alpha.themes.dashboard")
-
-    -- Set header
-    dashboard.section.header.val = {
-  	[[   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣭⣿⣶⣿⣦⣼⣆         ]],
-  	[[    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ]],
-  	[[          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷⠄⠄⠄⠄⠻⠿⢿⣿⣧⣄     ]],
-  	[[           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ]],
-  	[[          ⢠⣿⣿⣿⠈  ⠡⠌⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ]],
-  	[[   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘⠄ ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ]],
-  	[[  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ]],
-  	[[ ⣠⣿⠿⠛⠄⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ]],
-    [[ ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇⠄⠛⠻⢷⣄ ]],
-    [[      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ]],
-    [[       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ]],
-    }
-
-    -- Set menu
-    dashboard.section.buttons.val = {
-      dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
-      dashboard.button("SPC ee", "  > Toggle file explorer", "<cmd>NvimTreeToggle<CR>"),
-      dashboard.button("SPC ff", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
-      dashboard.button("SPC fs", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
-      dashboard.button("SPC wr", "󰁯  > Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
-      dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),
-    }
-
-    -- Send config to alpha
-    alpha.setup(dashboard.opts)
-
-    -- Disable folding on alpha buffer
-    vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
-  end,
-},
     {
-  "folke/which-key.nvim",
-  event = "VeryLazy",
-  init = function()
-    vim.o.timeout = true
-    vim.o.timeoutlen = 500
-  end,
-  opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  },
-},
-}) 
+        "goolord/alpha-nvim",
+        event = "VimEnter",
+        config = function()
+            local alpha = require("alpha")
+            local dashboard = require("alpha.themes.dashboard")
+
+            -- Set header
+            dashboard.section.header.val = {
+                [[   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣭⣿⣶⣿⣦⣼⣆         ]],
+                [[    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ]],
+                [[          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷⠄⠄⠄⠄⠻⠿⢿⣿⣧⣄     ]],
+                [[           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ]],
+                [[          ⢠⣿⣿⣿⠈  ⠡⠌⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ]],
+                [[   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘⠄ ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ]],
+                [[  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ]],
+                [[ ⣠⣿⠿⠛⠄⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ]],
+                [[ ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇⠄⠛⠻⢷⣄ ]],
+                [[      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ]],
+                [[       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ]],
+            }
+
+            -- Set menu
+            dashboard.section.buttons.val = {
+                dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
+                dashboard.button("SPC ee", "  > Toggle file explorer", "<cmd>NvimTreeToggle<CR>"),
+                dashboard.button("SPC ff", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
+                dashboard.button("SPC fs", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
+                dashboard.button("SPC wr", "󰁯  > Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
+                dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),
+            }
+
+            -- Send config to alpha
+            alpha.setup(dashboard.opts)
+
+            -- Disable folding on alpha buffer
+            vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
+        end,
+    },
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 500
+        end,
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
+    },
+})
