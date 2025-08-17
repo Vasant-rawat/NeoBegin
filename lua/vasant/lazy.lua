@@ -19,8 +19,18 @@ require("lazy").setup({
     { "MunifTanjim/nui.nvim" },
 
 
-
-
+    {
+        'nvim-flutter/flutter-tools.nvim',
+        lazy = false,
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'stevearc/dressing.nvim', -- optional for vim.ui.select
+        },
+        config = function ()
+            require("flutter-tools").setup{}
+            
+        end,
+    },
     {
         "sphamba/smear-cursor.nvim",
         opts = {
@@ -39,7 +49,6 @@ require("lazy").setup({
     {
         "vague2k/vague.nvim",
         config = function()
-            --require("vague").setup({ transparent = true })
             vim.cmd("colorscheme vague")
             vim.cmd(":hi statusline guibg=NONE")
         end
