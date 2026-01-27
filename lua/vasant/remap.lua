@@ -1,14 +1,14 @@
-vim.keymap.set("n","<leader>pv",vim.cmd.Ex) 
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 
 ---Use to replace a selected word with the new one
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 
--- THIS KEYBINDING HELPS TO MOVE A LINE OF SELECTED CODE USING J AND K J FOR downwarsd 
--- direction and K for upward direction 
+-- THIS KEYBINDING HELPS TO MOVE A LINE OF SELECTED CODE USING J AND K J FOR downwarsd
+-- direction and K for upward direction
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")--
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") --
 
 --To format lsp buffer
 vim.keymap.set("n", "<leader>f", function()
@@ -43,7 +43,8 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
 -- Search and replace
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search and replace word under cursor" })
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+    { desc = "Search and replace word under cursor" })
 
 -- Buffer navigation
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
@@ -103,9 +104,7 @@ vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc = "Navigate t
 -- Completion keymaps are handled in the cmp setup in lazy.lua
 
 
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
-
-
-vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Toggle file explorer" })
-vim.keymap.set("n", "<leader>o", "<cmd>Neotree focus <CR>", { desc = "Find files" })
-
+vim.keymap.set("n", "<leader>o", "<cmd>Oil<CR>", { desc = "Open Files" })
+vim.keymap.set('n', '<leader> e', require("oil").toggle_float)

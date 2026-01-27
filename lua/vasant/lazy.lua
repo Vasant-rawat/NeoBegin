@@ -26,9 +26,8 @@ require("lazy").setup({
             'nvim-lua/plenary.nvim',
             'stevearc/dressing.nvim', -- optional for vim.ui.select
         },
-        config = function ()
-            require("flutter-tools").setup{}
-            
+        config = function()
+            require("flutter-tools").setup {}
         end,
     },
     {
@@ -47,10 +46,13 @@ require("lazy").setup({
 
     --Colors
     {
-        "vague2k/vague.nvim",
+        "navarasu/onedark.nvim",
+        priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
-            vim.cmd("colorscheme vague")
-            vim.cmd(":hi statusline guibg=NONE")
+            require('onedark').setup {
+                style = 'darker'
+            }
+            require('onedark').load()
         end
     },
     -- Status Line
@@ -202,75 +204,27 @@ require("lazy").setup({
 
     -- Neo-tree
     {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons",
-            "MunifTanjim/nui.nvim",
-        },
+        'stevearc/oil.nvim',
+        ---@module 'oil'
+        ---@type oil.SetupOpts
+        opts = {},
+        -- Optional dependencies
+        dependencies = { { "nvim-mini/mini.icons", opts = {} } },
+        --dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+        lazy = false,
+
         config = function()
-            require("neo-tree").setup({
-                close_if_last_window = true,
-                window = {
-                    position = "left",
-                    width = 30,
-                    mappings = {
-                        ["<space>"] = "none",
-                        ["l"] = "open_with_window_picker",
-                        ["h"] = "close_node",
-                        ["v"] = "vsplit_with_window_picker",
-                        ["s"] = "split_with_window_picker",
-                        ["t"] = "open_tabnew", -- Open in new tab
-                        ["a"] = "add",
-                        ["A"] = "add_directory",
-                        ["d"] = "delete",
-                        ["r"] = "rename",
-                        ["y"] = "copy_to_clipboard",
-                        ["x"] = "cut_to_clipboard",
-                        ["p"] = "paste_from_clipboard",
-                        ["c"] = "copy",
-                        ["m"] = "move",
-                        ["q"] = "close_window",
-                        ["R"] = "refresh",
-                        ["?"] = "show_help",
-                        ["<"] = "prev_source",
-                        [">"] = "next_source",
-                    }
+            require("oil").setup {
+                columns = { "icon" },
+                keymaps = {
+                    ["<C-h>"] = false,
+                    ["<M-h>"] = "actions.select_split",
                 },
-                filesystem = {
-                    filtered_items = {
-                        visible = false,
-                        hide_dotfiles = false,
-                        hide_gitignored = false,
-                        hide_by_name = {
-                            ".git",
-                            "node_modules",
-                            ".cache",
-                        },
-                    },
-                    follow_current_file = true,
-                    hijack_netrw_behavior = "open_current",
-                    use_libuv_file_watcher = true,
-                    window = {
-                        mappings = {
-                            ["<cr>"] = "open_tabnew",
-                            ["o"] = "open_tabnew",
-                            ["O"] = "open_with_window_picker",
-                        }
-                    }
-                },
-                event_handlers = {
-                    {
-                        event = "file_opened",
-                        handler = function()
-                            require("neo-tree.command").execute({ action = "close" })
-                        end
-                    },
-                }
-            })
-        end,
+                view_option ={show_hidden=true},
+            }
+        end
     },
+
 
     -- lazy.nvim
     {
@@ -289,6 +243,7 @@ require("lazy").setup({
         }
     },
     -- Treesitter
+    --
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
@@ -409,6 +364,8 @@ require("lazy").setup({
     -- LSP and Completion
     {
         'VonHeikemen/lsp-zero.nvim',
+
+
         branch = 'v3.x',
         lazy = false,
         priority = 500,
@@ -436,7 +393,7 @@ require("lazy").setup({
             require('mason-lspconfig').setup({
                 ensure_installed = {
                     'lua_ls',
-                    'tsserver',
+                    'ts_ls',
                     'eslint',
                 },
                 handlers = {
@@ -464,8 +421,18 @@ require("lazy").setup({
             end)
 
             -- Configure lua language server for neovim
-            require('lspconfig').lua_ls.setup(lsp_zero.nvim_lua_ls())
-
+            --require('lspconfig').lua_ls.setup(lsp_zero.nvim_lua_ls())
+            vim.lsp.config.lua_ls = {
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            global = { "vim" },
+                            workspace = { checkThirdParty = false, },
+                        },
+                    },
+                },
+            }
+            vim.lsp.enable('lua_ls')
             -- Completion Setup
             local cmp = require('cmp')
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
