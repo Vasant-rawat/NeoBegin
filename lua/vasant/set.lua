@@ -1,4 +1,5 @@
 vim.opt.guicursor = ""
+vim.opt.clipboard="unnamedplus"
 
 -- Line numbers
 vim.opt.number = true

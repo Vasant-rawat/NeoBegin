@@ -46,13 +46,19 @@ require("lazy").setup({
 
     --Colors
     {
-        "navarasu/onedark.nvim",
+        "aktersnurra/no-clown-fiesta.nvim",
         priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
-            require('onedark').setup {
-                style = 'darker'
+            local opts = {
+                theme = "dark",
+                styles = {
+                    type = { bold = true },
+                    lsp = { underline = false },
+                    match_paren = { underline = true },
+                },
             }
-            require('onedark').load()
+            local plugin = require "no-clown-fiesta"
+            return plugin.load(opts)
         end
     },
     -- Status Line
@@ -220,7 +226,13 @@ require("lazy").setup({
                     ["<C-h>"] = false,
                     ["<M-h>"] = "actions.select_split",
                 },
-                view_option ={show_hidden=true},
+                view_option = { show_hidden = true
+                ,
+                    is_hidden_file = function(name, _)
+                        return name == ".git" or name == "node_modules"
+                    end,
+
+                },
             }
         end
     },
