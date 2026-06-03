@@ -45,22 +45,13 @@ require("lazy").setup({
     },
 
     --Colors
-    {
-        "aktersnurra/no-clown-fiesta.nvim",
-        priority = 1000, -- make sure to load this before all the other start plugins
-        config = function()
-            local opts = {
-                theme = "dark",
-                styles = {
-                    type = { bold = true },
-                    lsp = { underline = false },
-                    match_paren = { underline = true },
-                },
-            }
-            local plugin = require "no-clown-fiesta"
-            return plugin.load(opts)
-        end
-    },
+{
+    "vague-theme/vague.nvim",
+    priority = 1000,
+    config = function()
+        vim.cmd.colorscheme("vague")
+    end,
+},
     -- Status Line
     {
         "nvim-lualine/lualine.nvim",
