@@ -52,8 +52,6 @@ vim.keymap.set("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>x", "<cmd>bdelete<CR>", { desc = "Close buffer" })
 
 -- Neo-tree
-vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Toggle file explorer" })
-vim.keymap.set("n", "<leader>o", "<cmd>Neotree focus<CR>", { desc = "Focus file explorer" })
 
 -- Telescope
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
@@ -101,10 +99,7 @@ vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end, { desc = "Navigate t
 vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end, { desc = "Navigate to harpoon 3" })
 vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc = "Navigate to harpoon 4" })
 
--- Completion keymaps are handled in the cmp setup in lazy.lua
-
-
+-- file open commands 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
 vim.keymap.set("n", "<leader>o", "<cmd>Oil<CR>", { desc = "Open Files" })
 vim.keymap.set('n', '<leader> e', require("oil").toggle_float)

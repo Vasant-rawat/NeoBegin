@@ -208,6 +208,35 @@ require("lazy").setup({
         end,
     },
 
+    {
+        'dmtrKovalenko/fff.nvim',
+        build = function()
+            -- downloads a prebuilt binary or falls back to cargo build
+            require("fff.download").download_or_build_binary()
+        end,
+        opts = {
+            debug = {
+                enabled = true,
+                show_scores = true,
+            },
+        },
+        lazy = false, -- the plugin lazy-initialises itself
+        keys = {
+            { "ff", function() require('fff').find_files() end, desc = 'FFFind files' },
+            { "fg", function() require('fff').live_grep() end,  desc = 'LiFFFe grep' },
+            {
+                "fz",
+                function() require('fff').live_grep({ grep = { modes = { 'fuzzy', 'plain' } } }) end,
+                desc = 'Live fffuzy grep',
+            },
+            {
+                "fc",
+                function() require('fff').live_grep({ query = vim.fn.expand("<cword>") }) end,
+                desc = 'Search current word',
+            },
+        },
+    },
+
     -- Neo-tree
     {
         'stevearc/oil.nvim',
@@ -254,13 +283,24 @@ require("lazy").setup({
             "rcarriga/nvim-notify",
         }
     },
+
+    {
+        "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+        lazy = false,
+        build = ":TSUpdate",
+
+        config = function()
+            require("nvim-treesitter").setup()
+        end,
+    },
     -- Treesitter
     --
-    {
+    --[[{
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function()
-            require("nvim-treesitter.configs").setup({
+            require("nvim-treesitter").setup({
                 ensure_installed = {
                     "lua", "vim", "javascript", "typescript", "python", "rust",
                     "go", "c", "cpp", "java", "html", "css", "json", "yaml",
@@ -300,7 +340,7 @@ require("lazy").setup({
         end,
     },
 
-
+--]]
     -- Better Syntax Highlighting
     {
         "folke/trouble.nvim",
@@ -525,8 +565,7 @@ require("lazy").setup({
             dashboard.section.buttons.val = {
                 dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
                 dashboard.button("SPC ee", "  > Toggle file explorer", "<cmd>NvimTreeToggle<CR>"),
-                dashboard.button("SPC ff", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
-                dashboard.button("SPC fs", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
+                dashboard.button("SPC ff", " 󰱼 > Find File", "<cmd> FFFind<CR>"),
                 dashboard.button("SPC wr", "󰁯  > Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
                 dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),
             }
