@@ -206,6 +206,7 @@ require("lazy").setup({
             require("fff.download").download_or_build_binary()
         end,
         opts = {
+            lazy_sync = true, -- don't auto-index at startup (prevents SIGSEGV when nvim opens in ~/)
             debug = {
                 enabled = true,
                 show_scores = true,
